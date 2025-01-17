@@ -1,8 +1,6 @@
 import { User } from "../models/user.model.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import cookieParser from "cookie-parser";
 export const register = async (req, res) => {
     try {
         const { fullname, username, password, confirmPassword, gender } = req.body;
@@ -59,5 +57,25 @@ export const login = async (req, res) => {
     } catch (error) {
         console.log(error);
 
+    }
+}
+
+export const logout = async (req, res) => {
+    try {
+        return res.status(200).cookie('token', '', { maxAge: 0, httpOnly: true }).json({ message: "User logged out successfully", success: true });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// this will show the user other logged in users except the user himself/herself
+export const getOtherUser = async (req, res) => {
+    try {
+        const loggedInUsersId = req.id;
+        const otheruser = await User.find({_id : {$ne : loggedInUsersId}}).select("-password");
+        return res.status(200).json(otheruser)
+    } catch (error) {
+        console.log(error);
+        
     }
 }
