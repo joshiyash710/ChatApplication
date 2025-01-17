@@ -42,7 +42,7 @@ const Signup = () => {
   }
   return (
     <div className='flex items-center justify-center min-w-96 mx-auto'>
-      <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100'>
+      <div className='w-full p-6 rounded-lg shadow-md bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100'>
         <h1 className='text-3xl font-bold text-center'>Signup</h1>
         <form onSubmit={onSubmitHandler}>
           <div>
@@ -66,10 +66,10 @@ const Signup = () => {
             <div className='flex items-center'><p>Female</p> <input type="checkbox" checked={user.gender === 'Female'} defaultChecked onChange={() => handleCheckbox("Female")} className="checkbox mx-2" /></div>
           </div>
           <div className='my-2'>
-            <button type='submit' className='btn-block btn-md mt-2 mb-2 border-slate-700'>Signup</button>
+            <button type='submit' className='btn-block btn-md mt-2 mb-2 border-slate-700 bg-slate-600 rounded-lg text-white'>Signup</button>
           </div>
           <div className='my-4'>
-            <span>Already have an account ?</span><Link to="/login"> Login</Link>
+            <span>Already have an account ?</span><Link to="/login" className='text-blue-700'> Login</Link>
           </div>
         </form>
       </div>

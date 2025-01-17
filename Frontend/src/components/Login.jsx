@@ -44,7 +44,7 @@ const Login = () => {
     }
     return (
         <div className='flex items-center justify-center min-w-96 mx-auto'>
-            <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100'>
+            <div className='w-full p-6 rounded-lg shadow-md bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100'>
                 <h1 className='text-3xl font-bold text-center'>Login</h1>
                 <form onSubmit={onSubmitHandler}>
 
@@ -59,10 +59,10 @@ const Login = () => {
 
 
                     <div className='my-2'>
-                        <button type='submit' className='btn-block btn-md mt-2 mb-2 border-slate-700'>Login</button>
+                        <button type='submit' className='btn-block btn-md mt-2 mb-2 border-slate-700 bg-slate-700 text-white rounded-lg'>Login</button>
                     </div>
                     <div className='my-4'>
-                        <span>Don't have an account ?</span><Link to="/register"> Signup</Link>
+                        <span>Don't have an account ?</span><Link to="/register" className='text-blue-700'> Signup</Link>
                     </div>
                 </form>
             </div>
