@@ -1,23 +1,48 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import classnames from 'classnames';
 
-const Message = ({message}) => {
-    return (
-        <div className="chat chat-end">
-            <div className="chat-image avatar">
-                <div className="w-10 rounded-full">
-                    <img
-                        alt="Tailwind CSS chat bubble component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                </div>
-            </div>
-            <div className="chat-header">
-              
-                <time className="text-xs opacity-50 text-white">12:45</time>
-            </div>
-            <div className="chat-bubble text-white">{message?.message}</div>
-          
+const Message = ({ message }) => {
+  const scroll = useRef();
+  const { authUser , selectedUser  } = useSelector((store) => store.user);
+
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+  console.log(authUser?.user?._id);
+  
+  return (
+    <div
+      ref={scroll}
+      className={classnames('chat', {
+        'chat-end': message?.senderId === authUser?.user?._id,
+        'chat-start': message?.senderId !== authUser?.user?._id,
+      })}
+    >
+      <div className="chat-image avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS chat bubble component"
+            src={
+              message?.senderId === authUser?.user?._id
+                ? authUser?.user?.profilePicture
+                : selectedUser?.profilePicture
+            }
+          />
         </div>
-    )
-}
+      </div>
+      <div className="chat-header">
+        <time className="text-xs opacity-50 text-white">12:45</time>
+      </div>
+      <div
+        className={classnames('chat-bubble', {
+          'bg-gray-200 text-black': message?.senderId !== authUser?.user?._id,
+        })}
+      >
+        {message?.message}
+      </div>
+    </div>
+  );
+};
 
-export default Message
+export default Message;

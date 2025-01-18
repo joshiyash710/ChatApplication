@@ -11,14 +11,15 @@ const useGetMessages =  () => {
         try {
             axios.defaults.withCredentials = true
             const res = await axios.get(`http://localhost:8000/api/v1/message/get/${selectedUser?._id}`)
-            dispatch(setMessages(res.data))
+            
+            
+            dispatch(setMessages(res?.data))
         } catch (error) {
             console.log(error);
-        }
-
-        fetchMessages()
+        } 
     }
-  },[selectedUser])
+    fetchMessages()
+  },[selectedUser?._id,setMessages])
 }
 
 export default useGetMessages
