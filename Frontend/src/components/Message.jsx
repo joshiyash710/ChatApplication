@@ -9,7 +9,6 @@ const Message = ({ message }) => {
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
-  console.log(authUser?.user?._id);
   
   return (
     <div
