@@ -13,11 +13,7 @@ const Message = ({ message }) => {
   return (
     <div
       ref={scroll}
-      className={classnames('chat', {
-        'chat-end': message?.senderId === authUser?.user?._id,
-        'chat-start': message?.senderId !== authUser?.user?._id,
-      })}
-    >
+      className={`chat ${message?.senderId === authUser?.user?._id ? 'chat-end' : 'chat-start'}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img

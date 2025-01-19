@@ -5,8 +5,9 @@ import userRoutes from './routes/user.route.js';
 import messageRoutes from './routes/message.route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-const app = express()
-dotenv.config()
+import {app,server} from "./socket/socket.js"
+
+dotenv.config({})
 const PORT = process.env.PORT || 3000
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
@@ -18,7 +19,7 @@ const corseOptions = {
 app.use(cors(corseOptions))
 app.use('/api/v1/user',userRoutes)
 app.use('/api/v1/message',messageRoutes)
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server running at port ${PORT}`);
     connectDB()
 })

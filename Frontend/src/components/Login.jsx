@@ -18,19 +18,19 @@ const Login = () => {
     const onSubmitHandler = async (e) => {
         e.preventDefault()
         try {
-            const res = axios.post(`http://localhost:8000/api/v1/user/login`, user, {
+            const res = await axios.post(`http://localhost:8000/api/v1/user/login`, user, {
                 header : {
                     'Content-Type' : 'application/json'
                 },
                 withCredentials : true
             })
-            if((await res).data.success){
-                toast.success((await res).data.message)
+            if(res?.data?.success){
+                toast.success( res?.data?.message)
                 navigate('/')
-                dispatch(setAuthUser((await res).data))
+                dispatch(setAuthUser( res?.data))
             }
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data?.message)
             console.log(error);
             
         }

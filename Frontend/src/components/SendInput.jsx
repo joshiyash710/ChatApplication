@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
-import { setMessages } from '../redux/message.slice';
+import { setMessages } from '../redux/message.slice.js';
 const SendInput = () => {
     const [message,setMessage] = useState("")
     const {selectedUser} = useSelector(store=>store.user)
@@ -17,7 +17,7 @@ const SendInput = () => {
                 },
                 withCredentials : true
             })
-           dispatch(setMessages([...messages,res.data.newMessage]));
+           dispatch(setMessages([...messages,res?.data?.newMessage]));
             
         } catch (error) {
             console.log(error);
