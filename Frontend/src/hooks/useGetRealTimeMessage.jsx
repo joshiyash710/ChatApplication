@@ -4,13 +4,22 @@ import { setMessages } from "../redux/message.slice.js"
 
 const useGetRealTimeMessage = () => {
     const dispatch = useDispatch()
-    const {socket} = useSelector(store=>store.socket)
-    const {messages} = useSelector(store=>store.message)
-    useEffect(()=>{
-        socket.on("newMessage",(newMessage)=>{
-            dispatch(setMessages([...messages,newMessage]))
-        })
-        return () => socket?.off("newMessage")
-    },[setMessages,messages])
+    const { socket } = useSelector(store => store.socket)
+    const { messages } = useSelector(store => store.message)
+
+    useEffect(() => {
+        if (!socket) return; // Check if socket is defined
+
+        const handleNewMessage = (newMessage) => {
+            dispatch(setMessages([...messages, newMessage]))
+        };
+
+        socket.on("newMessage", handleNewMessage)
+
+        return () => {
+            socket.off("newMessage", handleNewMessage)
+        }
+    }, [socket, setMessages, messages]) // Add socket to dependencies
 }
+
 export default useGetRealTimeMessage
